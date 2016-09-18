@@ -22,6 +22,12 @@ services:
     image: cpitzak/weather-dht22-service:latest
     links:
       - db
+    ports:
+      - 8888:8888
+    devices:
+      - "/dev/mem:/dev/vcio"
+    cap_add:
+      - SYS_RAWIO
     env_file:
       - dht22_service.env
 
