@@ -1,0 +1,30 @@
+version: '2'
+services:
+  web:
+    image: cpitzak/weather-web:latest
+    links:
+      - db
+      - weather_service
+      - dht22_service
+    ports:
+      - 3000:3000
+    env_file:
+      - web.env
+
+  weather_service:
+    image: cpitzak/weather-service:latest
+    links:
+      - db
+    env_file:
+      - weather_service.env
+
+  dht22_service:
+    image: cpitzak/weather-dht22-service:latest
+    links:
+      - db
+    env_file:
+      - dht22_service.env
+
+  db:
+    image: dhermanns/rpi-mongo:2.6.4
+
